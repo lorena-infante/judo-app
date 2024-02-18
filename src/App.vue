@@ -1,8 +1,17 @@
 <template>
-    <h1>💖 Hello World!</h1>
-    <p>Welcome to your Electron application.</p>
-  </template>
+  <TheHeader></TheHeader>
+  <TheFooter></TheFooter>
+</template>
   
-  <script setup>
-  console.log('👋 This message is being logged by "App.vue", included via Vite');
-  </script>
+<script>
+  import TheHeader from './components/header/TheHeader.vue';
+  import TheFooter from './components/footer/TheFooter.vue';
+
+  export default {
+    components:{
+      TheHeader,
+      TheFooter
+    }
+  }
+
+</script>
