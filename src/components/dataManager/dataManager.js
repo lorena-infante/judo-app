@@ -1,5 +1,5 @@
 var fs = require('fs');
-export class DataManager {
+export default class DataManager {
     constructor(basepath) {
         this.folderpath = `${basepath}/data/`;
         this.competitionList = [];
