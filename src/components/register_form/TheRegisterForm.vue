@@ -4,8 +4,10 @@
             <div class="col-md-6">
                 <label for="name" class="form-label">Nombre</label>
                 <select @click="getJudokasName" id="name" class="form-select">
-                    <option selected>Escoger...</option>
-                    <option>{{ judokaName }}</option>
+                    <option v-for= "judokasName in judokasNames">
+                        {{ judokasName }}
+                    </option>
+                    
                 </select>
             </div>
             <div class="col-md-6">
@@ -75,7 +77,8 @@ export default {
             dataManager: new DataManager('./'),
             competitions: [],
             judokas: {},
-            judokaName: ''
+            judokaName: '',
+            judokasNames:''
 
         };
     },
@@ -88,11 +91,11 @@ export default {
 
         async getJudokasName(){
             await this.getInitDropdownData();
+            //parsing ProxyArray to JSON
             let judokasJSON = JSON.parse(JSON.stringify(this.judokas)).judokas;
-            console.log('this.judokas from onClick: ', judokasJSON);
-            judokasJSON.forEach((judoka) => {
+            this.judokasNames = judokasJSON.map((judoka) => {
                 this.judokaName = judoka.name;
-                //console.log(`${judoka.name}`);
+                return`${this.judokaName}`;
             });
         },
 
@@ -105,15 +108,6 @@ export default {
 
 
 </script>
-
-<script setup>
-import { onMounted } from 'vue'
-
-onMounted(() => {
-  console.log(`the component is now mounted.`);
-  })
-</script>
-
 
 <style scoped>
 .register_form__container {
