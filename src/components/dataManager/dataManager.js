@@ -104,6 +104,45 @@ export class DataManager {
 
         }
     }
+    async updateJudoka(judokaID,new_parameters){
+        const promise = await this.getJudokas()
+        const judokas = promise['judokas']
+        let judoka_target={};
+        for (const judoka of judokas){
+            console.log(judoka)
+            if (judoka['id']===judokaID){
+                judoka_target=judoka;
+                for(const param of Object.keys(new_parameters)){
+                    console.log(param)
+                    if (judoka_target.hasOwnProperty(param)){
+                        judoka_target[param]=new_parameters[param];                  
+                    }
+                }
+                const new_judokas = JSON.stringify({"judokas":judokas});
+                this.updateDB("judokas",new_judokas);
+            }
+        }
+    }
+    async updateCompetition(competitionID,new_parameters){
+        const promise = await this.getCompetitions()
+        const competitions = promise['competitionList']
+        let comp_target={};
+        for (const comp of competitions){
+            if (comp['id']===competitionID){
+                comp_target=comp;
+                for(const param of Object.keys(new_parameters)){
+                    if (comp_target.hasOwnProperty(param)){
+                        comp_target[param]=new_parameters[param];               
+                    }
+                }
+                const new_comp = JSON.stringify({"competitionsList":competitions});
+                this.updateDB("competitions",new_comp);
+            }
+        }
+    }
 }
+
+
+
 
 //module.exports = DataManager;
