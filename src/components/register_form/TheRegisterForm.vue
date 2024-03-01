@@ -4,17 +4,18 @@
             <div class="col-md-6">
                 <label for="name" class="form-label">Nombre</label>
                 <select @click="getJudokasName" id="name" class="form-select">
-                    <option v-for= "judokasName in judokasNames">
+                    <option v-for="judokasName in judokasNames">
                         {{ judokasName }}
                     </option>
-                    
+
                 </select>
             </div>
             <div class="col-md-6">
                 <label for="championship" class="form-label">Campeonato</label>
-                <select id="championship" class="form-select">
-                    <option selected>Escoger...</option>
-                    <option>...</option>
+                <select @click="getCompetitionName" id="championship" class="form-select">
+                    <option v-for="competitionName in competitionsNames">
+                        {{ competitionName }}
+                    </option>
                 </select>
             </div>
             <div class="col-md-6">
@@ -75,11 +76,13 @@ export default {
     data() {
         return {
             dataManager: new DataManager('./'),
-            competitions: [],
+            competitions: {},
+            competitionName: '',
+            competitionsNames: '',
             judokas: {},
             judokaName: '',
-            judokasNames:''
-
+            judokasNames: '',
+            //TODO: preguntar por el JSON de categories
         };
     },
     methods: {
@@ -89,13 +92,23 @@ export default {
             return this.judokas, this.competitions;
         },
 
-        async getJudokasName(){
+        async getJudokasName() {
             await this.getInitDropdownData();
             //parsing ProxyArray to JSON
             let judokasJSON = JSON.parse(JSON.stringify(this.judokas)).judokas;
             this.judokasNames = judokasJSON.map((judoka) => {
                 this.judokaName = judoka.name;
-                return`${this.judokaName}`;
+                return `${this.judokaName}`;
+            });
+        },
+        async getCompetitionName() {
+            await this.getInitDropdownData();
+            //parsing ProxyArray to JSON
+            let competitionsJSON = JSON.parse(JSON.stringify(this.competitions)).competitionsList;
+            //console.log(competitionsJSON);
+            this.competitionsNames = competitionsJSON.map((competition) => {
+                this.competitionName = competition.name;
+                return `${this.competitionName}`;
             });
         },
 
