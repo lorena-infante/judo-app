@@ -1,4 +1,4 @@
-import {DataManager} from './components/dataManager/dataManager.js';
+import { DataManager } from './components/dataManager/dataManager.js';
 const rootDataMng = "./";
 var fs = require('fs');
 const Competition_manager = new DataManager(rootDataMng);
@@ -8,12 +8,12 @@ console.log(judokas)
 
 //debugger;
 
-competitions["competitionList"].forEach((el) => {
+competitions['competitionsList'].forEach((el) => {
     console.log(`${el.name},${el.date},${el.place}`);
   });
 
-console.log(judokas['judokas'])
-judokas['judokas'].forEach((el) => {
+console.log('judokas', judokas )
+judokas.forEach((el) => {
   console.log(`${el.name}`);
 });
 

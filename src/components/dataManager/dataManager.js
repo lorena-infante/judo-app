@@ -1,5 +1,5 @@
 var fs = require('fs');
-export default class DataManager {
+export class DataManager {
     constructor(basepath) {
         this.folderpath = `${basepath}/data/`;
         this.competitionList = [];
@@ -42,7 +42,7 @@ export default class DataManager {
     }
     async deleteJudokabyID(IDtoDelete){
         const promise = await (this.getJudokas());
-        const judokas=promise['judokas']
+        const judokas = promise['judokas'];
         for(const judoka of judokas){
             if(judoka["id"]===IDtoDelete){
                 judokas.splice(judokas.indexOf(judoka), 1);
@@ -84,8 +84,11 @@ export default class DataManager {
         }
     }
     async updateJudoka(judokaID,new_parameters){
-        const promise = await this.getJudokas()
-        const judokas = promise['judokas']
+        /* const promise = await this.getJudokas();
+        const judokas = promise['judokas'];
+        console.log('promise', promise); */
+        //por cambio en el import los datos se muestran de una manera menos anidada
+        let judokas = await this.getJudokas();
         let judoka_target={};
         for (const judoka of judokas){
             console.log(judoka)
@@ -104,7 +107,8 @@ export default class DataManager {
 
         }
     }
-    async updateJudoka(judokaID,new_parameters){
+    //duplicated funct 
+   /*  async updateJudoka(judokaID,new_parameters){
         const promise = await this.getJudokas()
         const judokas = promise['judokas']
         let judoka_target={};
@@ -122,13 +126,15 @@ export default class DataManager {
                 this.updateDB("judokas",new_judokas);
             }
         }
-    }
+    } */
     async updateCompetition(competitionID,new_parameters){
-        const promise = await this.getCompetitions()
-        const competitions = promise['competitionList']
+        const promise = await this.getCompetitions();
+        const competitions = promise["competitionList"];
+        console.log('promise', promise);
+
         let comp_target={};
         for (const comp of competitions){
-            if (comp['id']===competitionID){
+            if (comp['id'] === competitionID){
                 comp_target=comp;
                 for(const param of Object.keys(new_parameters)){
                     if (comp_target.hasOwnProperty(param)){
@@ -142,7 +148,3 @@ export default class DataManager {
     }
 }
 
-
-
-
-//module.exports = DataManager;

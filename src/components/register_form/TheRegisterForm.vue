@@ -35,25 +35,12 @@
                 </div>
             </div>
             <div class="col-md-6">
-                <label for="golden" class="form-label fw-semibold">Si hubo tiempo de Golden Score, presione aquí:</label>
-                <div>
-                    <p>
-                        <button class="btn btn-outline-warning" type="button" data-bs-toggle="collapse"
-                            data-bs-target="#collapseWidthExample" aria-expanded="false"
-                            aria-controls="collapseWidthExample">
-                            Golden Score
-                        </button>
-                    </p>
-                    <div>
-                        <div class="collapse" id="collapseWidthExample">
-                            <div class="input-group mb-3">
-                                <span class="input-group-text">MM:</span>
-                                <input type="number" class="form-control" aria-label="minutes">
-                                <span class="input-group-text">SS:</span>
-                                <input type="number" class="form-control" aria-label="seconds">
-                            </div>
-                        </div>
-                    </div>
+                <label for="golden" class="form-label">Golden Score (si aplica)</label>
+                <div class="input-group mb-3">
+                    <span class="input-group-text">MM:</span>
+                    <input type="number" class="form-control" aria-label="minutes">
+                    <span class="input-group-text">SS:</span>
+                    <input type="number" class="form-control" aria-label="seconds">
                 </div>
             </div>
             <div class="col-12 text-center mb-3">
@@ -69,7 +56,7 @@
 
 
 <script>
-import DataManager from '../dataManager/dataManager.js';
+import { DataManager } from '../dataManager/dataManager.js';
 
 export default {
 
